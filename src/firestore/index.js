@@ -24,7 +24,7 @@ const updateData = (collection, payload) => {
 
 const updateCompany = (collection, payload) => {
   const { companyName } = payload
-  console.log('Entrada> ', collection, payload, companyName)
+
   const docRef = db.collection(collection)
   const query = docRef.where('companyName', '==', companyName).get()
 

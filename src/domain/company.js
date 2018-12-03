@@ -15,9 +15,7 @@ const validateFileExtension = (file) => {
 }
 
 const validateStructure = async (params) => {
-  console.log('validate', params[0], params[1], params[2])
   if (!(params[0] === 'Name' && params[1] === 'Zip' && params[2] === 'Website') || params.length !== 3) {
-    console.log(params, params.length)
     msg = 'Informe as colunas Name, Zip e Website no arquivo'
     return {msg, sucess: false}
   }
@@ -40,7 +38,7 @@ const update = async (file) => {
   if (!validateExtension.sucess) return validateExtension
 
   const validStructure = await validateFileStructure(file).then(valid => { return (valid) })
-  console.log('validstructure', validStructure)
+
   if (!validStructure.sucess) return validStructure
 
   try {

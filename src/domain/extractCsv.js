@@ -10,7 +10,6 @@ const parser = (filepath, callback) => {
     })
     .on('end', () => {
       results.shift()
-      console.log(results)
       callback(results)
     })
 }
@@ -23,13 +22,12 @@ const getHeader = (filepath, callback) => {
       results.push(data)
     })
     .on('end', () => {
-      console.log(results)
       callback(results[0])
     })
 }
 
 const promiseParser = (filepath, options) => {
-  console.log('Promise Parser file >> ', filepath)
+
   return new Promise((resolve, reject)  => {
     let records = []
     try {
