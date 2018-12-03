@@ -75,9 +75,35 @@ const getCompany = (collection, name, zip, callback) => {
 
 }
 
+const getData = async (collection, payload) => {
+  const { companyName } = payload
+  console.log('Entrada> ', collection, payload, companyName)
+  const docRef = db.collection(collection)
+  const query = docRef.where('companyName', '==', companyName).get()
+
+  const data = []
+  let obj = {}
+
+  await query.then(snapshot => {
+    if (snapshot.empty) return
+    snapshot.forEach(doc => {
+      //console.log(doc.id, '=>', doc.data())
+      const { id } = doc
+      const { companyName, zipCode, website } = doc.data()
+      obj = { id, companyName, zipCode, website }
+      data.push({ id })
+
+    })
+  })
+
+  console.log('obj>',obj)
+  console.log(data)
+}
+
 module.exports = {
   insertData,
   updateData,
   updateCompany,
-  getCompany
+  getCompany,
+  getData
 }

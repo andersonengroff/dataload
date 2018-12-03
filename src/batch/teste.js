@@ -14,9 +14,9 @@ const firestore = require('../firestore')
 
 //processCSV.processCSV('../uploads/teste.csv')
 
-const payload = { companyName: 'Walmart', zipCode: '82300440', website: 'walmart.com' }
+const payload = { companyName: 'WALMART', zipCode: '82300440', website: 'walmart.com' }
 //const getData = async () => {
-firestore.updateCompany('companies', payload)
+firestore.getData('companies', payload)
 //}
 
 //getData().then(x => { console.log('x', x) })
