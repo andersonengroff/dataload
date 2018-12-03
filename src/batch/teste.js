@@ -16,7 +16,8 @@ const firestore = require('../firestore')
 
 const payload = { companyName: 'WALMART', zipCode: '82300440', website: 'walmart.com' }
 //const getData = async () => {
-firestore.getData('companies', payload)
+const rst = Promise.resolve(firestore.getData('companies', payload)).then(rst => console.log('promise',rst))
+console.log(rst)
 //}
 
 //getData().then(x => { console.log('x', x) })

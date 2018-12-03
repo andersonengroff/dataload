@@ -98,6 +98,7 @@ const getData = async (collection, payload) => {
 
   console.log('obj>',obj)
   console.log(data)
+  return obj
 }
 
 module.exports = {
