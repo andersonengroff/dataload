@@ -5,7 +5,7 @@ const inputFilePath = '../batch/files/q1_catalog.csv'
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: 'https://dataload-b6c9c.firebaseio.com'
+  databaseURL: serviceAccount.databaseURL
 })
 
 

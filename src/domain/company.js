@@ -52,10 +52,12 @@ const update = async (file) => {
   }
 }
 
-const getCompany = (name, zip, callback) => {
-  const collection = 'companies'
-  firestore.getCompany(collection, name, zip, callback)
+const getCompany = async (companyName = '', zipCode = '') => {
+  const byName = await Promise.resolve(firestore.getCompanyByName(companyName))
+  const byZip = await Promise.resolve(firestore.getCompanyByZipCode(zipCode))
+  return byName.id !== undefined ? byName : byZip
 }
+
 
 module.exports = {
   update,

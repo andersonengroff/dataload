@@ -31,4 +31,15 @@ npm start
 
 # test
 npm run test
+
+```
+
+## API Documentation
+to see apidocumentation see http://localhost:3000/apidoc/
+to generate use
+
+```bash
+cd src
+npm install apidoc -g
+apidoc -f index.js -o public/apidoc
 ```

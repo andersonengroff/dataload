@@ -75,6 +75,48 @@ const getCompany = (collection, name, zip, callback) => {
 
 }
 
+const getCompanyByName = async (companyName) => {
+  const collection = 'companies'
+  const docRef = db.collection(collection)
+
+  // TODO very very limited search, firestore doesn't search fulltext, elasticSearch, Algolia, Splunk, BigQuery can do a better work
+  // see https://firebase.google.com/docs/firestore/solutions/search?hl=pt-br how to implement Algolia with functions
+  const queryEquals = docRef.where('companyName', '==', companyName).get()
+
+  let company = {}
+
+  await queryEquals.then(snapshot => {
+    snapshot.forEach(doc => {
+      //console.log(doc.id, '=>', doc.data())
+      const { id } = doc
+      const { companyName, zipCode, website } = doc.data()
+      company = { id, companyName, zipCode, website }
+
+    })
+  })
+
+  return company
+}
+
+const getCompanyByZipCode = async (zipCode) => {
+  const collection = 'companies'
+  const docRef = db.collection(collection)
+  const queryEquals = docRef.where('zipCode', '==', zipCode).get()
+
+  let company = {}
+
+  await queryEquals.then(snapshot => {
+    snapshot.forEach(doc => {
+      //console.log(doc.id, '=>', doc.data())
+      const { id } = doc
+      const { companyName, zipCode, website } = doc.data()
+      company = { id, companyName, zipCode, website }
+    })
+  })
+
+  return company
+}
+
 const getData = async (collection, payload) => {
   const { companyName } = payload
   console.log('Entrada> ', collection, payload, companyName)
@@ -82,7 +124,6 @@ const getData = async (collection, payload) => {
   const query = docRef.where('companyName', '==', companyName).get()
 
   const data = []
-  let obj = {}
 
   await query.then(snapshot => {
     if (snapshot.empty) return
@@ -90,15 +131,14 @@ const getData = async (collection, payload) => {
       //console.log(doc.id, '=>', doc.data())
       const { id } = doc
       const { companyName, zipCode, website } = doc.data()
-      obj = { id, companyName, zipCode, website }
-      data.push({ id })
+
+      data.push({ company : { id, companyName, zipCode, website } })
 
     })
   })
 
-  console.log('obj>',obj)
   console.log(data)
-  return obj
+  return data
 }
 
 module.exports = {
@@ -106,5 +146,7 @@ module.exports = {
   updateData,
   updateCompany,
   getCompany,
-  getData
+  getData,
+  getCompanyByName,
+  getCompanyByZipCode
 }

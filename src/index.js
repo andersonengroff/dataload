@@ -23,18 +23,59 @@ const app = express()
 
 app.use(express.static('public'))
 
+/**
+ * @api {get} /api/company?name=:name&zip=:zip Request company by name or zip
+ * @apiName getCompany
+ * @apiGroup Company
+ *
+ * @apiParam {String} name Company full complete name
+ * @apiParam {String} zip ZipCode zip code associate to company
+ *
+ * @apiSuccess {String} id identification code of company
+ * @apiSuccess {String} companyName  the full name of company
+ * @apiSuccess {String} zipCode  the zip code of company
+ * @apiSuccess {String} website  the website url of company
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *    {
+ *      id: "1",
+ *      companyName: "COCA COLA",
+ *      zipCode: "82560",
+ *      website: "www.cocacola.com.br"
+ *    }
+ *
+ */
 app.get('/api/company', (req, res)  => {
   const name = req.query.name
   const zip = req.query.zip
-  const sendCompany = (company) => (
-    res.send(company)
-  )
 
-  console.log('chamando firestore', name, zip)
-  company.getCompany(name, zip, sendCompany)
+  company.getCompany(name, zip).then(company => { res.send(company) })
 
 })
 
+
+/**
+ * @api {post} /upload
+ * @apiName uploadFile
+ * @apiGroup Company
+ *
+ * @apiParam {File} file with mimeType text/csv
+
+ *
+ * @apiSuccess {String} Upload realizado com sucesso
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *     <h2>Upload realizado com sucesso</h2>
+ *
+ * @apiError error description of error
+ * @apiErrorExample {json} Error-Response:
+ *     HTTP/1.1 403 Not Found
+ *     {
+ *       "error": "Informe as colunas Name, Zip e Website no arquivo"
+ *     }
+ */
 app.post('/upload', upload.single('file'), (req, res) => {
   console.log('Upload csv')
 
@@ -43,7 +84,7 @@ app.post('/upload', upload.single('file'), (req, res) => {
   company.update(file)
     .then((update) => {
       if (!update.sucess) {
-        res.status(403).send(update.msg)
+        res.status(403).send({error: update.msg})
       } else {
         res.send('<h2>Upload realizado com sucesso</h2>')
       }

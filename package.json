@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@google-cloud/storage": "^2.3.1",
+    "apidoc": "^0.17.7",
     "bluebird": "^3.5.3",
     "chalk": "^2.1.0",
     "csv-parser": "^2.1.0",
@@ -32,6 +33,7 @@
     "babel-core": "^6.26.0",
     "babel-eslint": "^7.2.3",
     "babel-loader": "^7.1.2",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.0",
     "concurrently": "^3.5.0",
@@ -44,9 +46,9 @@
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-standard": "^3.0.1",
     "forever": "^0.15.3",
+    "grunt-apidoc": "^0.11.0",
     "path": "^0.12.7",
     "webpack": "^3.6.0",
-    "webpack-node-externals": "^1.6.0",
-    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2"
+    "webpack-node-externals": "^1.6.0"
   }
 }
