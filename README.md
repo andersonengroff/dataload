@@ -25,7 +25,7 @@ npm install
 
 Open credentials.js and replace with your own Firestore credentials -- See How To in Create Credentials 
 
-npm install nodemon
+npm install -g nodemon
 
 cd src/batch
 
