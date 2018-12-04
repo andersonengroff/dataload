@@ -53,14 +53,14 @@ npm run test
 
 
 ## Create Credentials
-create your account on https://firebase.google.com
-go to console
-Add new project (suggest dataload as name of project)
-access Database, create a Firestore Database and after active test mode initialization
-access project configuration on project overview
-At services account generate a new private key, after confirm a json file was downloaded
-replace the file src/credentials/credentials.js with values of json file downloaded
-assure that attribute databaseURL contains your project-id Ex: 'databaseURL:': 'https://your-project-id-goes-here.firebaseio.com'
+- create your account on https://firebase.google.com
+- go to console
+- Add new project (suggest dataload as name of project)
+- access Database, create a Firestore Database and after active test mode initialization
+- access project configuration on project overview
+- At services account generate a new private key, after confirm a json file was downloaded
+- replace the file src/credentials/credentials.js with values of json file downloaded
+- assure that attribute databaseURL contains your project-id Ex: 'databaseURL:': 'https://your-project-id-goes-here.firebaseio.com'
 
 
 ## API Documentation
